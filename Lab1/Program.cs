@@ -98,6 +98,7 @@ namespace Lab1
             }            
         }
 
+        // Print menu
         void PrintMenu()
         {
             Console.WriteLine("");
@@ -122,15 +123,23 @@ namespace Lab1
         {
             Console.WriteLine("Reading Words");
             string pathToFile = "Words.txt";
-            FileStream fs = new FileStream(pathToFile, FileMode.Open, FileAccess.Read);
-            StreamReader sr = new StreamReader(fs, Encoding.UTF8);
-            string line = String.Empty;
+            string line;
             int numWords = 0;
 
-            while ((line = sr.ReadLine()) != null)
+            try
             {
-                words.Add(line);
-                numWords++;
+                FileStream fs = new FileStream(pathToFile, FileMode.Open, FileAccess.Read);
+                StreamReader sr = new StreamReader(fs, Encoding.UTF8);
+                while ((line = sr.ReadLine()) != null)
+                {
+                    words.Add(line);
+                    numWords++;
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("Could not find: " + pathToFile);
+                return;
             }
 
             totalNumWords += numWords;
