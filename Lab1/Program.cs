@@ -11,138 +11,95 @@ namespace Lab1
     {
 
         IList<string> words = new List<string>();
+        int totalNumWords;
 
         static void Main(string[] args)
         {
 
             Program pro = new Program();
             String userInput = "";
-            String message = "";
             DateTime startTime;
             DateTime endTime;
             IList<string> tempList;
-            int num = 0;
+            int num;
 
             while (userInput.ToLower() != "x")
             {
-                pro.PrintMenu(message);
+                pro.PrintMenu();
                 userInput = Console.ReadLine();
+                Console.Clear();
 
                 switch (userInput)
                 {
                     case "1":
-                        num = pro.ImportWordsFromFile();
-                        message = "Number of words = " + num;
+                        pro.ImportWordsFromFile();
                         break;
                     case "2":
                         startTime = DateTime.Now;
                         pro.BubbleSort(pro.words);
                         endTime = DateTime.Now;
-                        message = "Time taken to bubble sort: " + (endTime - startTime);
+                        Console.WriteLine("Time taken to bubble sort: " + (endTime - startTime).TotalMilliseconds + "ms");
                         break;
                     case "3":
                         startTime = DateTime.Now;
                         pro.LINQSort(pro.words);
                         endTime = DateTime.Now;
-                        message = "Time taken to LINQ sort: " + (endTime - startTime);
+                        Console.WriteLine("Time taken to LINQ sort: " + (endTime - startTime).TotalMilliseconds + "ms");
                         break;
                     case "4":
                         num = pro.CountDistintWords(pro.words);
-                        message = "Number of distinct words: " + num;
+                        Console.WriteLine("Number of distinct words: " + num);
                         break;
                     case "5":
                         tempList = pro.Take10Words(pro.words);
-                        message = "First 10 words = [";
                         for (int i = 0; i < tempList.Count(); i++)
                         {
-                            message += tempList[i];
-                            if (i == tempList.Count() - 1)
-                            {
-                                message += "]";
-                            }
-                            else
-                            {
-                                message += ", ";
-                            }
+                            Console.WriteLine(tempList[i]);
                         }
                         break;
                     case "6":
-                        num = pro.GetNumWordsWithJ(pro.words);
-                        message = "Number of words that start with J: " + num;
+                        tempList = pro.GetNumWordsWithJ(pro.words);
+                        for (int i = 0; i < tempList.Count(); i++)
+                        {
+                            Console.WriteLine(tempList[i]);
+                        }
+                        Console.WriteLine("Number of words that start with 'j': " + tempList.Count());
                         break;
                     case "7":
                         tempList = pro.GetWordsEndWithD(pro.words);
-                        message = "Number of words that end with D: " + tempList.Count() + "\n";
-                        message += "Words that end with D = [";
                         for (int i = 0; i < tempList.Count(); i++)
                         {
-                            message += tempList[i];
-                            if (i == tempList.Count() - 1)
-                            {
-                                message += "]";
-                            }
-                            else
-                            {
-                                message += ", ";
-                            }
+                            Console.WriteLine(tempList[i]);
                         }
+                        Console.WriteLine("Number of words that end with 'd': " + tempList.Count());
                         break;
                     case "8":
                         tempList = pro.GetWordsGreaterThan4Chars(pro.words);
-                        message = "Number of words greater than 4 chars: " + tempList.Count() + "\n";
-                        message += "Words greater than 4 chars = [";
                         for (int i = 0; i < tempList.Count(); i++)
                         {
-                            message += tempList[i];
-                            if (i == tempList.Count() - 1)
-                            {
-                                message += "]";
-                            }
-                            else
-                            {
-                                message += ", ";
-                            }
+                            Console.WriteLine(tempList[i]);
                         }
+                        Console.WriteLine("Number of words longer than 4 characters: " + tempList.Count());
                         break;
                     case "9":
                         tempList = pro.GetWordsLessThan3CharsAndStartWithA(pro.words);
-                        message = "Number of words less than 3 chars and starts with A: " + tempList.Count() + "\n";
-                        message += "Words less than 3 chars and starts with A = [";
                         for (int i = 0; i < tempList.Count(); i++)
                         {
-                            message += tempList[i];
-                            if (i == tempList.Count() - 1)
-                            {
-                                message += "]";
-                            }
-                            else
-                            {
-                                message += ", ";
-                            }
+                            Console.WriteLine(tempList[i]);
                         }
+                        Console.WriteLine("Number of words longer less than 3 characters and start with 'a': " + tempList.Count());
                         break;
                     default:
-                        message = "Invalid Input";
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Invalid Input");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                 }
             }            
         }
 
-        void PrintMenu(string message)
+        void PrintMenu()
         {
-            Console.Clear();
-            if (message == "Invalid Input")
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(message);
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(message);
-            }
-            
             Console.WriteLine("");
             Console.WriteLine("Options");
             Console.WriteLine("------------------------------");
@@ -160,8 +117,10 @@ namespace Lab1
             Console.Write("Make a selection: ");
         }
 
-        int ImportWordsFromFile()
+        // Option 1
+        void ImportWordsFromFile()
         {
+            Console.WriteLine("Reading Words");
             string pathToFile = "Words.txt";
             FileStream fs = new FileStream(pathToFile, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs, Encoding.UTF8);
@@ -173,16 +132,19 @@ namespace Lab1
                 words.Add(line);
                 numWords++;
             }
-            return numWords;
+
+            totalNumWords += numWords;
+            Console.WriteLine("Reading Words complete");
+            Console.WriteLine("Imported " + numWords + " Words");
+            Console.WriteLine("There are " + totalNumWords + " Words total");
         }
 
+        // Option 2
         IList<string> BubbleSort(IList<string> words)
         {
-            IList<string> newList = new List<string>();
+            IList<string> newList = new List<string>(words);
             String temp;
             int i, j, l;
-
-            newList = words;
 
             l = newList.Count();
 
@@ -201,6 +163,7 @@ namespace Lab1
             return newList;
         }
 
+        // Option 3
         IList<string> LINQSort(IList<string> words)
         {
             IList<string> tempList = new List<string>();
@@ -210,6 +173,7 @@ namespace Lab1
             return tempList;
         }
 
+        // Option 4
         int CountDistintWords(IList<string> words)
         {
             IList<string> tempList = new List<string>();
@@ -222,6 +186,7 @@ namespace Lab1
             return numDistinct;
         }
 
+        // Option 5
         IList<string> Take10Words(IList<string> words)
         {
             IList<string> tempList = new List<string>();
@@ -231,23 +196,26 @@ namespace Lab1
             return tempList;
         }
 
-        int GetNumWordsWithJ(IList<string> words)
+        // Option 6
+        IList<string> GetNumWordsWithJ(IList<string> words)
         {
-            int num = 0;
+            IList<string> tempList = new List<string>();
+
             for (int i = 0; i < words.Count(); i++)
             {
                 if (words[i].StartsWith("j"))
                 {
-                    num++;
+                    tempList.Add(words[i]);
                 }
                 else if (words[i].StartsWith("J"))
                 {
-                    num++;
+                    tempList.Add(words[i]);
                 }
             }
-            return num;
+            return tempList;
         }
 
+        // Option 7
         IList<string> GetWordsEndWithD(IList<string> words)
         {
             IList<string> tempList = new List<string>();
@@ -267,6 +235,7 @@ namespace Lab1
             return tempList;
         }
 
+        // Option 8
         IList<string> GetWordsGreaterThan4Chars(IList<string> words)
         {
             IList<string> tempList = new List<string>();
@@ -282,6 +251,7 @@ namespace Lab1
             return tempList;
         }
 
+        // Option 9
         IList<string> GetWordsLessThan3CharsAndStartWithA(IList<string> words)
         {
             IList<string> tempList = new List<string>();
