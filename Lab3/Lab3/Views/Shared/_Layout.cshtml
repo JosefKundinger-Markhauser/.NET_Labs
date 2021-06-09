@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        This is my Header<br />
+        Welcome to Lab3<br />
+        Name: Josef Kundinger-Markhauser<br />
+        @Html.ActionLink("Home", "Index", "Home")
+        @Html.ActionLink("Razor", "Razor", "Home")
+        @Html.ActionLink("CreatePerson", "CreatePerson", "Home")
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+    <footer>
+        This is the Footer :)<br />
+        a. _Layout.cshtml allows us to reuse parts of code like the header and footer without having to re-write it all of the time.<br />
+        b. For the CSS file I referenced where the file was in the example project and put the file in wwwroot/css/<br />
+        For the layout file, I looked at the slides and that's where it was suggested to be put.<br />
+    </footer>
+</body>
+</html>

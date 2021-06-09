@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Count";
+
+    int count = 0;
+    var message = "";
+}
+
+@for (count = Int32.Parse(ViewBag.count); count > 0; count--)
+{
+
+    if (count == 1)
+    {
+        message = "no";
+    }
+    else
+    {
+        message = (count - 1).ToString();
+    }
+    <p>
+        @count green bottles hanging on the wall,<br />
+        @count green bottles hanging on the wall,<br />
+        And if 1 green bottle should accidentally fall,<br />
+        There'll be @message green bottles hanging on the wall<br />
+    </p>
+
+}
+

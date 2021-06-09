@@ -1,0 +1,13 @@
+﻿@{ 
+    ViewData["Title"] = "Razor";
+}
+
+<h3>How many lines would you like to display?</h3>
+<form asp-controller="Home" asp-action="Count" method="post">
+    <table>
+        <tr>
+            <td>Count: </td>
+            <td><input type="number" name="count" min="50" max="100"/></td>
+        </tr>
+    </table>
+</form>

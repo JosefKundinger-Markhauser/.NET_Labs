@@ -1,0 +1,38 @@
+﻿@{ 
+    ViewData["Title"] = "CreatePerson";
+}
+
+<h3>Create a new Person</h3>
+<form asp-controller="Home" asp-action="DisplayPerson" method="post">
+    <table>
+        <tr>
+            <td>First Name</td>
+            <td><input type="text" name="FirstName" /></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input type="text" name="LastName"/></td>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td><input type="number" name="Age" /></td>
+        </tr>
+        <tr>
+            <td>Email Address</td>
+            <td><input type="email" name="EmailAddress" /></td>
+        </tr>
+        <tr>
+            <td>Date of Birth</td>
+            <td><input type="date" name="DateOfBirth" /></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="Password" /></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td><input type="text" name="Description" /></td>
+        </tr>
+    </table>
+    <input type="submit" value="Create" />
+</form>
