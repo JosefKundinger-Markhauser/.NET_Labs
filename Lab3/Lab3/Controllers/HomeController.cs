@@ -40,10 +40,10 @@ namespace Lab3.Controllers
             {
                 return View(model);
             }
-            return View();
+            return Error();
         }
 
-        public IActionResult TestError()
+        public IActionResult Error()
         {
             return View();
         }
