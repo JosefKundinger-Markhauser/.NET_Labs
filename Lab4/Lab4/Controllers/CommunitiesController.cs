@@ -26,7 +26,6 @@ namespace Lab4.Controllers
             var viewModel = new CommunityViewModel {
                 Communities = await _context.Communities.ToListAsync(),
                 CommunityMemberships = await _context.CommunityMemberships.ToListAsync()
-
             };
 
             if (Id != null)

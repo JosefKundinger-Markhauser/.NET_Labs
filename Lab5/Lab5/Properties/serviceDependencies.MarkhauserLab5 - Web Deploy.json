@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/sqlservermarkhauser/databases/Lab5Database",
+      "type": "mssql.azure",
+      "connectionId": "DefaultDBConnection",
+      "secretStore": null
+    },
+    "storage1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/markhauserimages",
+      "type": "storage.azure",
+      "connectionId": "AzureBlobStorage",
+      "secretStore": null
+    }
+  }
+}
