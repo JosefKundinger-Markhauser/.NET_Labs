@@ -42,6 +42,13 @@ namespace Lab5.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Upload(IFormFile answerFile, int imageType)
         {
+
+            // Check to make sure file was selected
+            if (answerFile == null)
+            {
+                return View("Error");
+            }
+
             var length = answerFile.Length;
             BlobContainerClient containerClient;
             string containerName = "";
@@ -122,8 +129,7 @@ namespace Lab5.Controllers
                 return NotFound();
             }
 
-            var image = await _context.AnswerImages
-                .FirstOrDefaultAsync(m => m.AnswerImageId == id);
+            var image = await _context.AnswerImages.FirstOrDefaultAsync(m => m.AnswerImageId == id);
             if (image == null)
             {
                 return NotFound();
