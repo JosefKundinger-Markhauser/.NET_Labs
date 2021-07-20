@@ -1,0 +1,19 @@
+
+Questions:
+1.	Define each HTTP Status Code that you used in this project and explain where/when you should use them.
+2.	Does the service you created in this assignment conform to all REST principals? Explain why. 
+
+Answers:
+1.
+200: When the request has succeeded.
+201: When the request has succeeded and created a new resource as a result.
+202: When the request is accepted but no action is taking place yet.
+
+400: When the user sends a request with invalid syntax
+404: When the server cannot find the requested resource
+
+500: When the server encounters a situation it doesn't know how to handle.
+
+2.No
+I did not define that the request can be cacheable or not.
+Both UI and Data storage are manipulated in the same program.
